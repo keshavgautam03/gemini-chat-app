@@ -1,20 +1,18 @@
-# Use a slim Node image
+# 1) Use a slim Node image
 FROM node:18-alpine
 
-# Where your app lives
+# 2) Create app dir
 WORKDIR /app
 
-# Copy only what’s needed to install deps
+# 3) Install only production deps
 COPY package.json package-lock.json ./
-
-# Install only production deps
 RUN npm ci --only=production
 
-# Copy the rest of your source code
+# 4) Copy source
 COPY . .
 
-# Expose the port your app uses
+# 5) Expose the API port
 EXPOSE 5001
 
-# Run your server
+# 6) Start your Express/socket server
 CMD ["node", "src/index.js"]

@@ -1,10 +1,15 @@
+version: "3.8"
+
 services:
   mongo:
     image: mongo:latest
+    restart: always
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    networks:
+      - fullstack-chat-app
 
   backend:
     build:
@@ -12,19 +17,29 @@ services:
       dockerfile: Dockerfile
     env_file:
       - ./backend/.env
+    restart: always
     ports:
       - "5001:5001"
     depends_on:
       - mongo
+    networks:
+      - fullstack-chat-app
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    restart: always
     ports:
       - "80:80"
     depends_on:
       - backend
+    networks:
+      - fullstack-chat-app
 
 volumes:
   mongo_data:
+
+networks:
+  fullstack-chat-app:
+    driver: bridge
