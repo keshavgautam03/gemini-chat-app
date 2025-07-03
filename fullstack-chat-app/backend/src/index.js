@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     "http://localhost",                    // for your static‐served frontend
-    "https://gemini-chat-app-rho.vercel.app"
+    "http://gemini-production-00ea.up.railway.app"
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
