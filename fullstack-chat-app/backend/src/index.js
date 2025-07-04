@@ -27,13 +27,8 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(cors({
   origin: [
-<<<<<<< HEAD
     "http://localhost:5173", // for local development
     "https://gemini-chat-app-rho.vercel.app" // your Vercel frontend
-=======
-    "http://localhost",                    // for your static‐served frontend
-    "http://gemini-production-00ea.up.railway.app"
->>>>>>> 8a3021574668408d191fd0c45890476c7647048d
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
