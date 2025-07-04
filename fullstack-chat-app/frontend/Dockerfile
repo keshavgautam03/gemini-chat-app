@@ -1,19 +1,15 @@
-FROM node:18-alpine as build
-
+# 1) Build step: compile your Vite/React app
+FROM node:18-alpine AS builder
 WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm install
-
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
+RUN npm run build      # outputs to /app/dist by default
 
-RUN npm run build
-
-FROM nginx:alpine
-
-COPY --from=build /app/dist /usr/share/nginx/html
-
+# 2) Serve step: nginx with custom proxy rules
+FROM nginx:stable-alpine
+# (make sure nginx.conf is next to this Dockerfile)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"] 
+CMD ["nginx", "-g", "daemon off;"]
