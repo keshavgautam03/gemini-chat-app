@@ -40,3 +40,17 @@ npm run build
 ```shell
 npm start
 ```
+
+### To run app locally
+
+```frontend
+cd /frontend
+npm install
+npm run dev
+```
+
+```backend
+cd /backend
+npm install
+npm run dev
+```

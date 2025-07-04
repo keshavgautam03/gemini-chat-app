@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(cors({
   origin: [
     "http://localhost:5173", // for local development
-    "https://gemini-chat-app-rho.vercel.app" // your actual Vercel frontend URL
+    "https://gemini-chat-app-rho.vercel.app" // your Vercel frontend
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
